@@ -1,0 +1,30 @@
+{
+    "name": "lijinhua/email",
+    "description": "邮件发送功能",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Lijinhua\\Email\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "李金华",
+            "email": "316919821@qq.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Lijinhua\\Email\\ServiceProvider"
+            ],
+            "aliases": {
+                "Sms": "Lijinhua\\Email\\Facade"
+            }
+        }
+    }
+}
