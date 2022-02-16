@@ -23,7 +23,7 @@
                 "Lijinhua\\Email\\ServiceProvider"
             ],
             "aliases": {
-                "Sms": "Lijinhua\\Email\\Facade"
+                "Email": "Lijinhua\\Email\\Facade"
             }
         }
     }
