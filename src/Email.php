@@ -36,8 +36,9 @@ class Email
      * 发送验证码
      *
      * @param  string  $emailAddress
+     * @param  string|null  $codeMailClass
      */
-    public function sendCode(string $emailAddress)
+    public function sendCode(string $emailAddress, ?string $codeMailClass = null)
     {
         $this->setKey($emailAddress);
 
@@ -48,10 +49,16 @@ class Email
 
         $validMinutes = (int) config('email.code.validMinutes', 5);
 
-        if (config('email.debug')) {
-            Mail::mailer('log')->to([$emailAddress])->send(new CodeMail($code->code, $validMinutes));
+        if (is_null($codeMailClass)) {
+            $mailable = new CodeMail($code->code, $validMinutes);
         } else {
-            Mail::to([$emailAddress])->send(new CodeMail($code->code, $validMinutes));
+            $mailable = new $codeMailClass($code->code, $validMinutes);
+        }
+
+        if (config('email.debug')) {
+            Mail::mailer('log')->to([$emailAddress])->send($mailable);
+        } else {
+            Mail::to([$emailAddress])->send($mailable);
         }
     }
 
